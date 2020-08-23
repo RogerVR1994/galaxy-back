@@ -5,4 +5,9 @@ from .models import Participant
 class ParticipantSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Participant
-        fields = ('name', 'manager', 'type_of_participant', 'foundation_date')
+        fields = ('sid', 'name', 'manager', 'type_of_participant', 'foundation_date')
+
+    def update(self, instance, validated_data):
+        instance.title = validated_data['sid']
+        instance.save()
+        return instance
